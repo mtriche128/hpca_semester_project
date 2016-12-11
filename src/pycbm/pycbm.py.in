@@ -1,0 +1,123 @@
+################################################################################
+# File  : pycbm.py                                                             #
+# Brief : This file implements a python interface to libcbm.so                 #
+# Author: Matthew Triche                                                       #
+#                                                                              #                                                                            
+# Permission is hereby granted, free of charge, to any person obtaining a copy #
+# of this software and associated documentation files (the "Software"), to     #
+# deal in the Software without restriction, including without limitation the   #
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or  #
+# sell copies of the Software, and to permit persons to whom the Software is   #
+# furnished to do so, subject to the following conditions:                     #
+#                                                                              #
+# The above permission notice shall be included in all copies or substantial   #
+# portions of the Software.                                                    #
+#                                                                              #
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR   #
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,     #
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  #
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER       #
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING      #
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS #
+# IN THE SOFTWARE.                                                             #
+################################################################################
+
+import os
+import array
+from ctypes import *
+
+################################################################################
+# Define Build System Variables                                                #
+#                                                                              #
+# This section of code may define variables which have the format "@VAR@". If  #
+# so, this source file has yet to be processed by the project's build system.  #
+# Certain parameters are required by this python interface, but aren't known   #
+# until the build system has run. Once processed, variables within this        #
+# section will automatically be updated with nessessary parameters.            #
+################################################################################
+
+LIB_PATH = "@LIBCBM_PATH@"
+
+################################################################################
+# Define Classes                                                               #
+################################################################################
+
+# ------------------------------------------------------------------------------
+# class pycbm
+#
+# This class shall implement the python interface to libcbm.so
+
+class pycbm:
+	# ------------------------------------------------------------------------
+	# __init__
+	#
+	# A handle to the shared object shall be created within the constructor.
+	
+	def __init__(self):
+		self.lib = cdll.LoadLibrary(LIB_PATH) # create handle to libcbm.so
+
+		# set arguments passed to each function call within the library
+		self.lib.popcnt32n.argtypes  = [c_void_p, c_void_p, c_int]
+		self.lib.bitrev32n.argtypes  = [c_void_p, c_void_p, c_int]
+		self.lib.lib_free.argtypes   = []
+		
+		# set the return type of each funtion within the library
+		self.lib.popcnt32n.restype   = None
+		self.lib.bitrev32n.restypes  = None
+		self.lib.lib_free.restypes   = None
+		
+	# ------------------------------------------------------------------------
+	# __del__
+	#
+	# This is the class destructor. It's called when an instance is garbage
+	# collected by python. Before this instance is destroyed, all memory
+	# allocated within libcbm.so must be freed.
+	#
+	# NOTE: This is part of managing the life-cycle of shared objects.
+	
+	def __del__(self):
+		self.lib.lib_free() # ensure all memory is freed
+		
+	# ------------------------------------------------------------------------
+	# popcnt32n
+	#
+	# Element-wise population count on a buffer of 32-bit values.
+	#
+	# Arguments:
+	# buff_in - The input buffer. [ array.array('I') ]
+	# buff_out - The output buffer. [ array.array('I') ]
+	
+	def popcnt32n(self, buff_in, buff_out):
+		if len(buff_in) != len(buff_out):
+			print("Error: cbm.popcnt_32n: input and output buffers must be the same size!")
+			exit(1)
+		
+		(addr_in,  len_in)  = buff_in.buffer_info()
+		(addr_out, len_out) = buff_out.buffer_info()
+		
+		ptr_in = cast(addr_in, POINTER(c_void_p))
+		ptr_out = cast(addr_out, POINTER(c_void_p))
+		
+		self.lib.popcnt32n(ptr_in, ptr_out, len(buff_out))
+		
+	# ------------------------------------------------------------------------
+	# bitrev_32n
+	#
+	# Element-wise bit reversal on a buffer of 32-bit values.
+	#
+	# Arguments:
+	# buff_in - The input buffer. [ array.array('I') ]
+	# buff_out - The output buffer. [ array.array('I') ]
+	
+	def bitrev32n(self, buff_in, buff_out):
+		if len(buff_in) != len(buff_out):
+			print("Error: cbm.popcnt_32n: input and output buffers must be the same size!")
+			exit(1)
+		
+		(addr_in,  len_in)  = buff_in.buffer_info()
+		(addr_out, len_out) = buff_out.buffer_info()
+		
+		ptr_in = cast(addr_in, POINTER(c_void_p))
+		ptr_out = cast(addr_out, POINTER(c_void_p))
+		
+		self.lib.bitrev32n(ptr_in, ptr_out, len(buff_out))
