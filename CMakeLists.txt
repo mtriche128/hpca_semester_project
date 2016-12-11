@@ -5,8 +5,9 @@ cmake_minimum_required (VERSION 3.7)
 # set the project's name
 project (hpca_semester_project)
 
-# ------------------------------------------------------------------------------
-# Set build parameters.
+################################################################################
+# Set Build Parameters                                                         #                        
+################################################################################
 
 set(LIB_INSTALL_DIR   
     "${CMAKE_SOURCE_DIR}/lib" 

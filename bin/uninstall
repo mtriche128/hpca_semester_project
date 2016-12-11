@@ -1,4 +1,4 @@
- #!/usr/bin/env bash
+#!/bin/bash
 
 ################################################################################
 # File  : uninstall                                                            #
@@ -30,6 +30,7 @@
 ################################################################################
 
 INSTALL_MANIFEST=$1
+echo ${INSTALL_MANIFEST}
 
 # make sure this script is being run as root
 #if [ $(whoami) != "root" ]; then
@@ -38,7 +39,7 @@ INSTALL_MANIFEST=$1
 #fi
 
 # make sure a path to install_manifest.txt was provided
-if [ ${INSTALL_MANIFEST} == "" ]; then
+if [ "${INSTALL_MANIFEST}" == "" ]; then
 	echo $0: Error: The path to the installation manifest was not provided!
 	exit 1
 fi
@@ -49,7 +50,7 @@ if [ -f "${INSTALL_MANIFEST}" ]; then
 	for fpath in $(cat ${INSTALL_MANIFEST})
 	do
 		echo "removing ${fpath}..."
-		#rm ${fpath}
+		rm ${fpath}
 	done
 else
 	echo $0: Error: The installation manifest was not found!
