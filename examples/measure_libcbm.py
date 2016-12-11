@@ -9,10 +9,11 @@ import random
 import numpy as np
 import time
 from matplotlib import pyplot as plt
+%matplotlib inline
 
-N = 1024         # max buffer size
+N = 128          # max buffer size
 M = 4294967295   # single value range (U32)
-R = 100          # averaging rounds
+R = 50           # averaging rounds
 
 popcnt_buff_in  = array.array('I', range(N))
 popcnt_buff_out = array.array('I', range(N))
@@ -46,9 +47,7 @@ for i in range(N):
 	x_data.append(i+1)
 	popcnt_y_data.append(avg_popcnt32n_time)
 	bitrev_y_data.append(avg_bitrev32n_time)
-	
-print(len(x_data),len(popcnt_y_data), len(bitrev_y_data))
-	
+
 fig, tgraph = plt.subplots()
 tgraph.plot(np.array(x_data),np.array(popcnt_y_data), label='popcnt32n')
 tgraph.plot(np.array(x_data),np.array(bitrev_y_data), label='bitrev32n')

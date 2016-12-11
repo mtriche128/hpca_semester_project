@@ -1,6 +1,6 @@
 # This is the root cmake script for the HPCA semester project.
 
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.2)
 
 # set the project's name
 project (hpca_semester_project)

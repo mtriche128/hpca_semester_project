@@ -1,6 +1,6 @@
 # Propogate the build process to each source code component.
 
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.2)
 
 # build the "C Benchmarks Library"
 add_subdirectory(libcbm)

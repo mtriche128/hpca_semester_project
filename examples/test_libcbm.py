@@ -13,7 +13,7 @@ bitrev_buff_in  = array.array('I', [0x55555555,0xAAAAAAAA,0x00000001,0x80000000]
 bitrev_buff_out = array.array('I', [0,0,0,0])
 
 
-lib = cbm.cbm();
+lib = pycbm.pycbm();
 
 lib.popcnt32n(popcnt_buff_in, popcnt_buff_out)
 lib.bitrev32n(bitrev_buff_in, bitrev_buff_out)

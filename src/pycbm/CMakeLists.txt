@@ -1,6 +1,6 @@
 # Process the python interface for the "C Benchmarks Library".
 
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.2)
 
 # process the python interface script
 configure_file(pycbm.py.in pycbm.py @ONLY)
