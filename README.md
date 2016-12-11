@@ -12,7 +12,7 @@ All libraries and scripts compiled and processed by the project's build system a
 
 ### Pre-Reqs
 
-* cmake (>= v3.7)
+* cmake (>= v3.2)
 * python2.7
 * numpy
 * matplotlib
