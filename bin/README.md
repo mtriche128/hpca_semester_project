@@ -26,6 +26,6 @@ Example:
 $ cd hpca_semester_project
 $ bin/package
 $ ls
-bin  CMakeLists.txt  examples  notebooks  README.md  src
+bin  CMakeLists.txt  examples  hpca_semester_project.tar.gz  notebooks  README.md  src
 ```
 
