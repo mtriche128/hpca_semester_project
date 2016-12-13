@@ -90,7 +90,7 @@ The following files should now exist relative to the project's root directory:
 
 To verify the project was built and intalled successfully, try running one of the example notebooks.
 
-Using a web browser, navigate the the following URL: http://192.168.2.99:9090
+Using a web browser, navigate to the following URL: http://192.168.2.99:9090
 
 The login information should be xilinx/xilinx (username and password). Once logged onto Jupyter, navigate to the notebook located at hpca_semester_project/notebooks/measure_libcbm.ipynb
 
