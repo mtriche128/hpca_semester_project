@@ -43,8 +43,7 @@ A file called 'hpca_semester_project.tar.gz' should have been generated in the p
 
 #### Step (3) Upload Project to the PQYNQ Board
 
-Connect to the PYNQ board using sftp. The account and IP address should be xilinx@192.168.2.99 (password is xilinx)
-Once that is done, upload 'hpca_semester_project.tar.gz'.
+Connect to the PYNQ board using sftp. The account and IP address should be xilinx@192.168.2.99 (password is xilinx). Once that is done, upload 'hpca_semester_project.tar.gz'.
 
 ```
 $ sftp xilinx@192.168.2.99
@@ -58,8 +57,7 @@ sftp> exit
 
 #### Step (4) Unpackage the Project
 
-Connect to the PYNQ board over SSH. The account and IP addressed should be xilinx@192.168.2.99 (password is xilinx)
-Once connected to the PYNQ board over SSH, extract all file from the tarball into the 'jupyter_notebooks' directory.
+Connect to the PYNQ board over SSH. The account and IP addressed should be xilinx@192.168.2.99 (password is xilinx). Once connected to the PYNQ board over SSH, extract all file from the tarball into the 'jupyter_notebooks' directory.
 
 ```
 $ ssh xilinx@192.168.2.99 
@@ -93,10 +91,10 @@ The following files should now exist relative to the project's root directory:
 To verify the project was built and intalled successfully, try running one of the example notebooks.
 
 Using a web browser, navigate the the following URL: http://192.168.2.99:9090
-The login information should be xilinx/xilinx (username and password).
-Once logged onto Jupyter, navigate to the notebook located at hpca_semester_project/notebooks/measure_libcbm.ipynb
 
-On the toolbar located near the top of the page, select the "run cell" button. You should see a graph appear displaying the execution time of functions within libcbm.so vs. buffer size.
+The login information should be xilinx/xilinx (username and password). Once logged onto Jupyter, navigate to the notebook located at hpca_semester_project/notebooks/measure_libcbm.ipynb
+
+On the toolbar located near the top of the page, select the "run cell" button. You should see a graph appear displaying the execution time of functions within libcbm vs. buffer size.
 
 ### Building and Installing on a PC
 
