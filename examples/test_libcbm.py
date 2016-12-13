@@ -19,8 +19,9 @@ lib.popcnt32n(popcnt_buff_in, popcnt_buff_out)
 lib.bitrev32n(bitrev_buff_in, bitrev_buff_out)
 
 print("Pop-Count Results:")
-print(popcnt_buff_out)
+for (word_in,word_out) in zip(popcnt_buff_in,popcnt_buff_out):
+	print("0x%.8X -> 0x%.8X" % (word_in,word_out))
 
 print("Bit-Reversal Results:")
-for word in bitrev_buff_out:
-	print("0x%.8X" % word)
+for (word_in,word_out) in zip(bitrev_buff_in,bitrev_buff_out):
+	print("0x%.8X -> 0x%.8X" % (word_in,word_out))
