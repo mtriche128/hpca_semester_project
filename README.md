@@ -8,7 +8,7 @@ This is the HPCA semester project for Mike Morgan and Matthew Triche.
 
 ### Background
 
-All libraries and scripts compiled and processed by the project's build system are installed to and ran from within the project's directory structure without needing define special environment variables. This project is intended to be portable as possible. To achieve this, cmake was leveraged and forms the backbone of the project's build system.
+All libraries and scripts compiled and processed by the project's build system are installed to and ran from within the project's directory structure without needing to define special environment variables. This project is intended to be as portable as possible. To achieve this, cmake was leveraged and forms the backbone of the project's build system.
 
 ### Pre-Reqs
 
