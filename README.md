@@ -21,7 +21,7 @@ The PYNQ board's SD card image should come with all nessessary pre-reqs installe
 
 ### Setup for the PYNQ Board
 
-These directions assume your PYNQ board is connected to a host PC using a static IP connection.
+These directions assume your PYNQ board is connected to a host PC using a static IP address.
 
 #### Step (1) Clone the Git Repo
 
