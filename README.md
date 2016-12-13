@@ -86,7 +86,7 @@ The following files should now exist relative to the project's root directory:
 * lib/libcbm.so
 * module/pycbm.so
 
-#### Step (5) Run an Example Notebook
+#### Step (6) Run an Example Notebook
 
 To verify the project was built and intalled successfully, try running one of the example notebooks.
 
