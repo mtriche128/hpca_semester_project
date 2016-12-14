@@ -59,11 +59,13 @@ class pycbm:
 		# set arguments passed to each function call within the library
 		self.lib.popcnt32n.argtypes  = [c_void_p, c_void_p, c_int]
 		self.lib.bitrev32n.argtypes  = [c_void_p, c_void_p, c_int]
+		self.lib.ffs32n.argtypes     = [c_void_p, c_void_p, c_int]
 		self.lib.lib_free.argtypes   = []
 		
 		# set the return type of each funtion within the library
 		self.lib.popcnt32n.restype   = None
 		self.lib.bitrev32n.restypes  = None
+		self.lib.ffs32n.restypes     = None
 		self.lib.lib_free.restypes   = None
 		
 	# ------------------------------------------------------------------------
@@ -89,7 +91,7 @@ class pycbm:
 	
 	def popcnt32n(self, buff_in, buff_out):
 		if len(buff_in) != len(buff_out):
-			print("Error: cbm.popcnt_32n: input and output buffers must be the same size!")
+			print("Error: pycbm.popcnt32n: input and output buffers must be the same size!")
 			exit(1)
 		
 		(addr_in,  len_in)  = buff_in.buffer_info()
@@ -101,7 +103,7 @@ class pycbm:
 		self.lib.popcnt32n(ptr_in, ptr_out, len(buff_out))
 		
 	# ------------------------------------------------------------------------
-	# bitrev_32n
+	# bitrev32n
 	#
 	# Element-wise bit reversal on a buffer of 32-bit values.
 	#
@@ -111,7 +113,7 @@ class pycbm:
 	
 	def bitrev32n(self, buff_in, buff_out):
 		if len(buff_in) != len(buff_out):
-			print("Error: cbm.popcnt_32n: input and output buffers must be the same size!")
+			print("Error: pycbm.bitrev32n: input and output buffers must be the same size!")
 			exit(1)
 		
 		(addr_in,  len_in)  = buff_in.buffer_info()
@@ -121,3 +123,25 @@ class pycbm:
 		ptr_out = cast(addr_out, POINTER(c_void_p))
 		
 		self.lib.bitrev32n(ptr_in, ptr_out, len(buff_out))
+		
+	# ------------------------------------------------------------------------
+	# ffs32n
+	#
+	# Element-wise "Find First Set" on a buffer of 32-bit values.
+	#
+	# Arguments:
+	# buff_in - The input buffer. [ array.array('I') ]
+	# buff_out - The output buffer. [ array.array('I') ]
+	
+	def ffs32n(self, buff_in, buff_out):
+		if len(buff_in) != len(buff_out):
+			print("Error: pycbm.ffs32n: input and output buffers must be the same size!")
+			exit(1)
+		
+		(addr_in,  len_in)  = buff_in.buffer_info()
+		(addr_out, len_out) = buff_out.buffer_info()
+		
+		ptr_in = cast(addr_in, POINTER(c_void_p))
+		ptr_out = cast(addr_out, POINTER(c_void_p))
+		
+		self.lib.ffs32n(ptr_in, ptr_out, len(buff_out))

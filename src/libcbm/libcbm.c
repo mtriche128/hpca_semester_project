@@ -48,6 +48,7 @@
 
 EXPORT void popcnt32n(uint32_t *p_in, uint32_t *p_out, uint32_t size);
 EXPORT void bitrev32n(uint32_t *p_in, uint32_t *p_out, uint32_t size);
+EXPORT void    ffs32n(uint32_t *p_in, uint32_t *p_out, uint32_t size);
 EXPORT void lib_free(void);
 
 /* -------------------------------------------------------------------------- *
@@ -59,6 +60,7 @@ EXPORT void lib_free(void);
  * 
  * @param[in]  p_in  Pointer to the input buffer.
  * @param[out] p_out Pointer to the output buffer.
+ * @param[in]  size  The number of 32-bit elements in the buffer.
  */
 
 EXPORT void popcnt32n(uint32_t *p_in, uint32_t *p_out, uint32_t size)
@@ -82,6 +84,7 @@ EXPORT void popcnt32n(uint32_t *p_in, uint32_t *p_out, uint32_t size)
  * 
  * @param[in]  p_in  Pointer to the input buffer.
  * @param[out] p_out Pointer to the output buffer.
+ * @param[in]  size  The number of 32-bit elements in the buffer.
  */
 
 EXPORT void bitrev32n(uint32_t *p_in, uint32_t *p_out, uint32_t size)
@@ -105,6 +108,41 @@ EXPORT void bitrev32n(uint32_t *p_in, uint32_t *p_out, uint32_t size)
 		word_out <<= bits; 
 		
 		*(p_out++) = word_out;
+	}
+}
+
+
+/**
+ * @brief Element-wise "Find First Set" of a buffer composed of 32-bit values.
+ * 
+ * @param[in]  p_in  Pointer to the input buffer.
+ * @param[out] p_out Pointer to the output buffer.
+ * @param[in]  size  The number of 32-bit elements in the buffer.
+ */
+
+EXPORT void ffs32n(uint32_t *p_in, uint32_t *p_out, uint32_t size)
+{
+	uint32_t index;
+	uint32_t word_in;
+	
+	while(size--)
+	{
+		word_in = ~(*(p_in++));
+		
+		if(word_in == 0xFFFFFFFF)
+		{
+			index = 0;
+		}
+		
+		else
+		{
+ 			for (index = 1; word_in & (uint32_t)1; index++)
+			{   
+				word_in = word_in >> 1;
+			}
+		}
+		
+		*(p_out++) = index;
 	}
 }
 
